@@ -17,10 +17,10 @@ function App() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/"  data-test="home">Home</Link>
           </li>
           <li>
-            <Link to="/my-team">My Team</Link>
+            <Link to="/my-team" data-test="my-team">My Team</Link>
           </li>
         </ul>
       </nav>

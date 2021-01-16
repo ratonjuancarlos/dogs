@@ -49,7 +49,7 @@ const Breed = () => {
 
   return (
     <>
-      <h2>
+      <h2 data-test="detail-title">
         {breed}-{subBreed}
       </h2>
       {error && "Error!"}
@@ -67,6 +67,7 @@ const Breed = () => {
           />
           <div>
             <button
+            data-test="save-dog"
               disabled={!images.length > 0}
               onClick={() => saveDog(breed, subBreed)}
             >

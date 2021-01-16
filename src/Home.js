@@ -55,7 +55,7 @@ const Home = (props) => {
   };
 
   const getTitle = (subbreed, breed) =>
-    subbreed.length > 0 ? breed : <Link to={`/detail/${breed}`}>{breed}</Link>;
+    subbreed.length > 0 ? breed : <Link to={`/detail/${breed}`} data-test="dog-link" data-dog={`${breed}`} >{breed}</Link>;
 
   return (
     <>
@@ -72,7 +72,7 @@ const Home = (props) => {
                   subbreed.map((sb) => (
                     <ul>
                       <li>
-                        <Link to={`/detail/${breed}/${sb}`}>{sb}</Link>
+                        <Link to={`/detail/${breed}-${sb}`} data-dog={`${breed}-${sb}`} data-test="dog-link">{sb}</Link>
                       </li>
                     </ul>
                   ))}

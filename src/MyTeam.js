@@ -15,13 +15,14 @@ const [myDogs, setMyDogs] = useState(ls("dogs"))
 
   return (
     <div>
+        <h1>My Team</h1>
         {
             dogsKeys.map(([breed, subBreeds])=><div>
                 <h3>{breed}</h3>
-                { subBreeds.map(sb=><div>
+                { subBreeds.map(sb=><div data-test="dog-in-team">
                     <h4>{sb.subBreed}</h4>
                     <img src={`${sb.image}`}/>
-                    <button  onClick={()=>removeDog(sb.id)}>Remove</button>
+                    <button  data-test="remove-dog" onClick={()=>removeDog(sb.id)}>Remove</button>
                 </div>)}
             </div>)
         }
