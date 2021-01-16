@@ -1,46 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Home from './Home'
-import MyTeam from './MyTeam'
-import Detail from './Detail'
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from "pages/Home";
+import MyTeam from "pages/MyTeam";
+import Detail from "pages/Detail";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 
-function App() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    color: theme.palette.common.white,
+  },
+  body: {
+    margin: 15,
+  },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+}));
+
+export default function App() {
+  const classes = useStyles();
+
   return (
-    <Router>
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/"  data-test="home">Home</Link>
-          </li>
-          <li>
-            <Link to="/my-team" data-test="my-team">My Team</Link>
-          </li>
-        </ul>
-      </nav>
-
-      {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-      <Switch>
-        <Route path="/detail/:dog">
-          <Detail />
-        </Route>
-        <Route path="/my-team">
-          <MyTeam />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+    <div className={classes.root}>
+      <Router>
+        <AppBar position="static">
+          <Toolbar className={classes.toolbar}>
+            <Link to="/" data-test="home">
+              <Typography variant="h6" className={classes.title}>
+                Home
+              </Typography>
+            </Link>
+            <Link to="/my-team" data-test="my-team">
+              <Typography variant="h6" className={classes.title}>
+                My Team
+              </Typography>
+            </Link>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.body}>
+          <Switch>
+            <Route path="/detail/:dog">
+              <Detail />
+            </Route>
+            <Route path="/my-team">
+              <MyTeam />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
-  </Router>
   );
 }
-
-export default App;
