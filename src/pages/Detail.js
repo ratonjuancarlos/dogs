@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useFetch from "use-http";
 import Gallery from "components/Gallery";
 import HeaderDetail from "components/HeaderDetail";
+import Actions from "components/Actions";
 
 const Detail = () => {
   const { get, response, loading, error } = useFetch(
@@ -11,7 +12,7 @@ const Detail = () => {
   const { dog } = useParams();
   const [breed, subBreed] = dog.split("-");
   const url = subBreed ? `${breed}/${subBreed}` : `${breed}`;
-  const [images, setImages] = useState(() => get(`/${url}/images/random/3`));
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     loadInitialImages();
@@ -19,7 +20,7 @@ const Detail = () => {
   }, []);
 
   async function loadInitialImages() {
-    const initialImages = await get(`/${url}/images/random/3`);
+    const initialImages = await get(`/${url}/images/random/7`);
     if (response.ok) setImages(initialImages.message);
   }
 
@@ -29,8 +30,9 @@ const Detail = () => {
       {loading && "Loading..."}
       {images.length > 0 && (
         <>
-          <HeaderDetail {...{ breed, subBreed, image: images[0] }} />
-          <Gallery {...{ images, breed, subBreed }} />
+          <HeaderDetail {...{ breed, subBreed }} />
+          <Gallery {...{ images, breed, subBreed, dog }} />
+          <Actions {...{ breed, subBreed, image: images[0] }}/>
         </>
       )}
     </>
